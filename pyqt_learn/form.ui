@@ -80,7 +80,7 @@
        <attribute name="title">
         <string>文件操作</string>
        </attribute>
-       <widget class="QTextEdit" name="textEdit">
+       <widget class="CustomTextEdit" name="textEdit">
         <property name="geometry">
          <rect>
           <x>350</x>
@@ -169,6 +169,13 @@
    </widget>
   </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>CustomTextEdit</class>
+   <extends>QTextEdit</extends>
+   <header location="global">CustomTextEdit</header>
+  </customwidget>
+ </customwidgets>
  <tabstops>
   <tabstop>tabWidget</tabstop>
   <tabstop>textEdit</tabstop>

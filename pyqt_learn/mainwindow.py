@@ -15,47 +15,12 @@ SIZE_1K = 1024
 WARN_FILESIZE = 20
 FORB_FILESIZE = 200
 
-
-class CustomTextEdit(QTextEdit):
-    def __init__(self, parent=None):
-        super().__init__(parent)
-        self.viewport().setAcceptDrops(True)
-
-    def dragEnterEvent(self, event: QDropEvent):
-        print("drop enter event")
-        if event.mimeData().hasUrls():
-            event.acceptProposedAction()
-
-    def dropEvent(self, event: QDropEvent):
-        print("drop event")
-        if event.mimeData().hasUrls():
-            urls = event.mimeData().urls()
-            file_path = urls[0].toLocalFile()
-            self.load_file(file_path)
-            event.acceptProposedAction()
-
-    def load_file(self, file_path):
-        print(f"loading file {file_path}")
-        with open(file_path, "r") as file:
-            text = file.read()
-            self.setPlainText(text)
-
-
 class MainWindow(QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
-        #self.load_ui()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.__buildModelView()
-
-    def load_ui(self):
-        loader = QUiLoader()
-        path = os.fspath(Path(__file__).resolve().parent / "form.ui")
-        ui_file = QFile(path)
-        ui_file.open(QFile.ReadOnly)
-        loader.load(ui_file, self)
-        ui_file.close()
 
     def __buildModelView(self):
         self.model = QFileSystemModel(self)

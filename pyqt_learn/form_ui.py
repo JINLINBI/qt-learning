@@ -16,8 +16,10 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QHBoxLayout, QHeaderView, QLabel,
-    QMainWindow, QSizePolicy, QTabWidget, QTextEdit,
-    QTreeView, QVBoxLayout, QWidget)
+    QMainWindow, QSizePolicy, QTabWidget, QTreeView,
+    QVBoxLayout, QWidget)
+
+from CustomTextEdit import CustomTextEdit
 import main_rc
 
 class Ui_MainWindow(object):
@@ -28,7 +30,7 @@ class Ui_MainWindow(object):
         MainWindow.setBaseSize(QSize(600, 1027))
         MainWindow.setAcceptDrops(True)
         icon = QIcon()
-        icon.addFile(u":/icon/images/favicon.ico", QSize(), QIcon.Normal, QIcon.On)
+        icon.addFile(u":/icon/images/favicon.ico", QSize(), QIcon.Normal, QIcon.Off)
         MainWindow.setWindowIcon(icon)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
@@ -48,7 +50,7 @@ class Ui_MainWindow(object):
         self.tabWidget_2.setElideMode(Qt.ElideRight)
         self.tab_3 = QWidget()
         self.tab_3.setObjectName(u"tab_3")
-        self.textEdit = QTextEdit(self.tab_3)
+        self.textEdit = CustomTextEdit(self.tab_3)
         self.textEdit.setObjectName(u"textEdit")
         self.textEdit.setGeometry(QRect(350, 10, 591, 511))
         self.verticalLayoutWidget = QWidget(self.tab_3)
