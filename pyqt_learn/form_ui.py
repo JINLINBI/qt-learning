@@ -28,7 +28,7 @@ class Ui_MainWindow(object):
         MainWindow.setBaseSize(QSize(600, 1027))
         MainWindow.setAcceptDrops(True)
         icon = QIcon()
-        icon.addFile(u":/icon/images/favicon.ico", QSize(), QIcon.Normal, QIcon.Off)
+        icon.addFile(u":/icon/images/favicon.ico", QSize(), QIcon.Normal, QIcon.On)
         MainWindow.setWindowIcon(icon)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
