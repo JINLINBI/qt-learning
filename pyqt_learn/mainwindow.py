@@ -8,7 +8,7 @@ from PySide6.QtCore import QFileInfo, QFile, QDir
 from PySide6.QtGui import QTextCursor, QAction, QDropEvent
 from PySide6.QtUiTools import QUiLoader
 from form_ui import Ui_MainWindow
-from qt_material import apply_stylesheet
+
 
 
 SIZE_1K = 1024  
@@ -100,11 +100,3 @@ class MainWindow(QMainWindow):
 
         # 添加动作到菜单或工具栏
         target.addAction(action)
-
-if __name__ == "__main__":
-    app = QApplication()
-    apply_stylesheet(app, theme="default_dark.xml")
-    widget = MainWindow()
-    widget.show()
-
-    sys.exit(app.exec_())
