@@ -1,6 +1,8 @@
 import os
 import importlib
+from PySide6.QtWidgets import QPushButton
 from PySide6.QtCore import QObject, Signal
+from eaio_helper.plugin import PluginBase
 
 class PluginManager(QObject):
     # 定义一个信号，当插件被选中时触发
@@ -31,9 +33,8 @@ class PluginManager(QObject):
                     except Exception as e:
                         print(f'Failed to load plugin: {module_name}', str(e))
 
-    def getPluginNames(self):
-        # 返回所有插件名称
-        return [name for name, module in self.plugins]
+    def getButtons(self):
+        return PluginBase.add_button.buttons
     
     def getPlugins(self):
         return [module for _, module in self.plugins]
@@ -50,3 +51,21 @@ class PluginManager(QObject):
                     # 调用插件的 handleClick 方法
                     plugin_module.handleClick()
                 break
+
+    def layoutButtons(self, parentWidget, colnum=1):
+        count = 0
+        for name, info in self.getButtons().items():
+            print(f"name: {name}, handle_func: ${info}")
+            pb = QPushButton()
+            pb.setText(name)
+            def closure():
+                params = (info["func"], info["load_ui"], info["param"])
+                def onClicked():
+                    params[0](params[1], *(params[2][0]), **(params[2][1]))
+                return onClicked
+            pb.clicked.connect(closure())
+            pb.show()
+
+            # 排列组合
+            count = count + 1
+            parentWidget.addWidget(pb, (count - 1) // colnum, (count - 1) % colnum)
